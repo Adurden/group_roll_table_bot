@@ -21,7 +21,6 @@ def roll_table(num, face, dc, mod=0, tests=10000000):
     num_splits = np.sum(dist)
     num_per_split = 20/num_splits
     num_per_cnt = np.round(dist*num_per_split)
-    print(np.sum(num_per_cnt))
     if np.sum(num_per_cnt) < 20:
         num_per_cnt[round(len(num_per_cnt)/2)] += 20 - np.sum(num_per_cnt)
     if np.sum(num_per_cnt) > 20:
