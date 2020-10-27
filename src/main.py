@@ -7,8 +7,7 @@ from roll_funcs import roll_table
 
 
 client = commands.Bot(command_prefix=".")
-# token = os.getenv("GROUP_ROLL_TOKEN")
-token = "NzcwNDY3NDM2MDc1NDE3NjMy.X5d_tw.HAu4RhQmbHelL0FJdW_ke_baYdg"
+token = os.getenv("GROUP_ROLL_TOKEN")
 
 
 @client.event
