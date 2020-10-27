@@ -1,33 +1,28 @@
-import numpy as np
+import os
+
+import discord
+from discord.ext import commands
+
+from roll_funcs import roll_table
 
 
-def roll(num, face, mod=0):
-    return np.random.randint(1+mod, face+1+mod, num)
+client = commands.Bot(command_prefix=".")
+# token = os.getenv("GROUP_ROLL_TOKEN")
+token = "NzcwNDY3NDM2MDc1NDE3NjMy.X5d_tw.HAu4RhQmbHelL0FJdW_ke_baYdg"
 
 
-def pass_distribution(num, face, dc, mod=0, tests=10000000):
-    rolls = roll((tests, num), face, mod)
-    num_passed = np.sum(rolls > dc, axis=1)
-    num_passed, cnts = np.unique(num_passed, return_counts=True)
-    return(cnts/tests)
+@client.event
+async def on_ready():
+    await client.change_presence(status=discord.Status.idle,
+                                 activity=discord.Game("Listening to .help"))
+    print("I am online")
 
 
-def get_table(num, face, dc, mod=0, tests=10000000):
-    num_passed = pass_distribution(num, face, dc, mod, tests)
-    hit_counts = np.where(num_passed > 0.05)[0]
-    num_passed = num_passed[hit_counts]
-    dist = np.round(num_passed/min(num_passed))
-    num_splits = np.sum(dist)
-    num_per_split = 20/num_splits
-    num_per_cnt = np.round(dist+num_per_split)
-    if num_splits < 20:
-        num_per_cnt[round(len(num_per_cnt)/2)] += 1
-    if num_splits > 20:
-        num_per_cnt[round(len(num_per_cnt)/2)] -= 1
-    cur_key = 1
-    roll_table = dict()
-    for num_hit, rolls in zip(hit_counts, num_per_cnt):
-        for i in range(cur_key, cur_key+int(rolls)):
-            roll_table[i] = num_hit
-        cur_key += int(rolls)
-    return(roll_table)
+@client.command()
+async def get_table(ctx, num, face, mod, dc):
+    table = roll_table(num, face, dc, mod)
+    await ctx.send("\n".join("{!r}: {!r},".format(k, v)
+                   for k, v in table.items()))
+
+if __name__ == '__main__':
+    client.run(token)
