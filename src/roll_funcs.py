@@ -39,6 +39,8 @@ def pass_distribution(num, face, dc, mod=0, tests=10000000, adv=False):
         the value to be added to each attempt
     tests : int, default = 10,000,000
         the number of tests to simulate
+    adv : bool
+        if true give all dice
 
     Returns
     -------
@@ -59,7 +61,7 @@ def pass_distribution(num, face, dc, mod=0, tests=10000000, adv=False):
     return(cnts/tests)
 
 
-def roll_table(num, face, dc, mod=0, tests=10000000):
+def roll_table(num, face, dc, mod=0, tests=10000000, adv=False):
     """
     build a roll table applying a pass distrubtion to a single d20 roll
 
@@ -87,7 +89,7 @@ def roll_table(num, face, dc, mod=0, tests=10000000):
     num, face, dc, mod = int(num), int(face), int(dc), int(mod)
 
     # get the distribution of successes
-    num_passed = pass_distribution(num, face, dc, mod, tests)
+    num_passed = pass_distribution(num, face, dc, mod, tests, adv)
 
     # filter for more than 1 in 20 chance
     hit_counts = np.where(num_passed > 0.05)[0]
