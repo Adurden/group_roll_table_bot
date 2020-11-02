@@ -1,0 +1,8 @@
+language: "python"
+python:
+  - "3.8"
+install:
+  - pip install -r requirements.txt
+  - pip install flake8
+script:
+  - git diff -U0 $TRAVIS_COMMIT_RANGE | flake8 --diff
