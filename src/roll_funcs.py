@@ -19,7 +19,7 @@ def roll(num, face, mod=0):
     rolls : np.array
         a series of results from each roll
     """
-    return np.random.randint(1+ mod, face+1+mod, num)
+    return np.random.randint(1+mod, face+1+mod, num)
 
 
 def pass_distribution(num, face, dc, mod=0, tests=10000000):
