@@ -50,6 +50,7 @@ def pass_distribution(num, face, dc, mod=0, tests=5000000, adv=-1):
     """
     if adv < 0:
         rolls = roll((tests, num, 2), face, mod)
+        print((tests, num, 2), face, mod)
         adv_passed = np.sum(rolls > dc, axis=2)
         adv_passed[adv_passed > 1] = 1
         num_passed = np.sum(adv_passed, axis=1)
