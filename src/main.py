@@ -28,7 +28,7 @@ async def get_table(ctx, num, face, mod, dc):
 
 # add event for group roll table generation with adv
 @client.command()
-async def get_table_adv(ctx, num, face, mod, dc):
+async def get_table_adv(ctx, num, face, mod, dc=18):
     table = roll_table(num, face, dc, mod, adv=True)
     await ctx.send("\n".join("{!r}: {!r},".format(k, v)
                    for k, v in table.items()))
