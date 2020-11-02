@@ -59,7 +59,7 @@ def pass_distribution(num, face, dc, mod=0, tests=5000000, adv=-1):
         adv_passed = np.sum(rolls_adv > dc, axis=2)
         adv_passed = np.sum(adv_passed, axis=1)
         roll_nadv = roll((tests, num-adv), face, mod)
-        num_passed = np.sum(rolls > dc, axis=1) + adv_passed
+        num_passed = np.sum(roll_nadv > dc, axis=1) + adv_passed
     num_passed, cnts = np.unique(num_passed, return_counts=True)
     return(cnts/tests)
 
