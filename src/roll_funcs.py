@@ -49,7 +49,6 @@ def pass_distribution(num, face, dc, mod=0, tests=5000000, adv=-1):
         index. i.e. [0.25, 0.5, 0.25] would be a 1/4 cahnce for 0 passes etc.
     """
     if adv < 0:
-        print((tests, num, 2), face, mod)
         rolls = roll((tests, num, 2), face, mod)
         adv_passed = np.sum(rolls > dc, axis=2)
         adv_passed[adv_passed > 1] = 1

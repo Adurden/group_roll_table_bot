@@ -31,7 +31,7 @@ async def get_table(ctx, num, face, mod, dc):
 @client.command()
 async def get_table_adv(ctx, num, face, mod,
                         dc, adv: typing.Optional[int] = -1):
-    table = roll_table(num, face, dc, mod, adv)
+    table = roll_table(num, face, dc, mod, adv=adv)
     await ctx.send("\n".join("{!r}: {!r},".format(k, v)
                    for k, v in table.items()))
 
