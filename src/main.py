@@ -1,4 +1,5 @@
 import os
+import typing
 
 import discord
 from discord.ext import commands
@@ -28,8 +29,9 @@ async def get_table(ctx, num, face, mod, dc):
 
 # add event for group roll table generation with adv
 @client.command()
-async def get_table_adv(ctx, num, face, mod, dc=18):
-    table = roll_table(num, face, dc, mod, adv=True)
+async def get_table_adv(ctx, num, face, mod,
+                        dc, adv: typing.Optional[int] = -1):
+    table = roll_table(num, face, dc, mod, adv)
     await ctx.send("\n".join("{!r}: {!r},".format(k, v)
                    for k, v in table.items()))
 
