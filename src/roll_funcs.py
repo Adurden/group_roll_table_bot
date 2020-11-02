@@ -22,7 +22,7 @@ def roll(num, face, mod=0):
     return np.random.randint(1+mod, face+1+mod, num)
 
 
-def pass_distribution(num, face, dc, mod=0, tests=10000000, adv=False):
+def pass_distribution(num, face, dc, mod=0, tests=5000000, adv=False):
     """
     rolls a large number of tests to simulate a distrubtion of numbers of
     passes from a number of attempts
@@ -61,7 +61,7 @@ def pass_distribution(num, face, dc, mod=0, tests=10000000, adv=False):
     return(cnts/tests)
 
 
-def roll_table(num, face, dc, mod=0, tests=10000000, adv=False):
+def roll_table(num, face, dc, mod=0, tests=5000000, adv=False):
     """
     build a roll table applying a pass distrubtion to a single d20 roll
 
